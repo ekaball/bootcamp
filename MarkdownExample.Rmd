@@ -25,12 +25,30 @@ gap <- read.csv(curl("http://bit.ly/gap_data"))
 head(gap)
 ```
 
+Exercise 1
 Subset for EU and 1952, and plot:
 ```{r}
 eu_52 <- gap %>% filter(continent == "Europe", year== 1952)
 ggplot(data=eu_52, aes(x=gdpPercap, y = lifeExp)) + geom_point()
 
 ```
+
+Exercise 2
+Add 1967 in another color
+```{r}
+eu_5267 <- gap %>% filter(continent == "Europe", year %in% c(1952,1967))
+ggplot(data=eu_5267, aes(x=gdpPercap, y = lifeExp, color=factor(year))) + geom_point() # This adds color to the plot
+```
+
+Exercise 3
+Get the updated dataset & repeat exercises
+```{r}
+gap_upd <- read.csv(curl("http://bit.ly/gap_data_upd"))
+eu_5267_upd <- gap_upd %>% filter(continent == "Europe", year %in% c(1952,1967))
+ggplot(data=eu_5267_upd, aes(x=gdpPercap, y = lifeExp, color=factor(year))) + geom_point() # This adds color to the plot
+```
+
+
 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
