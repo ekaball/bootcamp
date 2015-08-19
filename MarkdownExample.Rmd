@@ -14,14 +14,23 @@ summary(cars)
 ```
 
 ```{r}
+library(curl)     # for reading data from https
+library(dplyr)    # for data manipulation
+library(ggplot2)  # for plotting
+```
+
+Load the data:
+```{r}
+gap <- read.csv(curl("http://bit.ly/gap_data"))
+head(gap)
+```
+
+Subset for EU and 1952, and plot:
+```{r}
+eu_52 <- gap %>% filter(continent == "Europe", year== 1952)
+ggplot(data=eu_52, aes(x=gdpPercap, y = lifeExp)) + geom_point()
 
 ```
 
-
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
